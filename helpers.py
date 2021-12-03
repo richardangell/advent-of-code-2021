@@ -1,4 +1,6 @@
-def load_input(file, remove_lines_breaks=False, convert_to_int=False):
+def load_input(
+    file, remove_lines_breaks=False, convert_to_int=False, split_lines=False
+):
     """Function to load input with optional processing."""
 
     with open(file) as f:
@@ -12,5 +14,9 @@ def load_input(file, remove_lines_breaks=False, convert_to_int=False):
     if convert_to_int:
 
         lines = [int(x) for x in lines]
+
+    if split_lines:
+
+        lines = [x.split(" ") for x in lines]
 
     return lines
