@@ -4,7 +4,7 @@ sys.path.append("..")
 import helpers  # noqa
 
 
-def calculate_oxygen_rating(input):
+def calculate_oxygen_rating(input: list[str]) -> int:
     """Function to calculate oxygen rating from diagnostic report."""
 
     n_chars = len(input[0])
@@ -43,7 +43,7 @@ def calculate_oxygen_rating(input):
     return oxygen
 
 
-def calculate_co2_rating(input):
+def calculate_co2_rating(input: list[str]) -> int:
     """Function to calculate CO2 rating from diagnostic report."""
 
     n_chars = len(input[0])
@@ -82,7 +82,7 @@ def calculate_co2_rating(input):
     return co2
 
 
-def calculate_oxygen_and_co2(input):
+def calculate_oxygen_and_co2(input: list[str]) -> tuple[int, int]:
     """Function to calculate oxygen and CO2 ratings from diagnostic report."""
 
     oxygen = calculate_oxygen_rating(input)

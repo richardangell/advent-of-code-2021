@@ -4,7 +4,7 @@ sys.path.append("..")
 import helpers  # noqa
 
 
-def calculate_gamma_and_epsilon(input):
+def calculate_gamma_and_epsilon(input: list[str]) -> tuple[int, int]:
     """Function to calculate gamma and epsilon from diagnostic report."""
 
     n_chars = len(input[0])
