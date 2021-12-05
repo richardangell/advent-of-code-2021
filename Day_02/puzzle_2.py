@@ -4,7 +4,7 @@ sys.path.append("..")
 import helpers  # noqa
 
 
-def calculate_position_and_depth(input):
+def calculate_position_and_depth(input: list[list[str]]) -> tuple[int, int]:
     """Function to horizontal and position from direction instructions."""
 
     horizontal_location = 0
