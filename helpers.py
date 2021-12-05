@@ -3,7 +3,7 @@ each puzzle.
 """
 
 
-def load_input(file, remove_lines_breaks=False):
+def load_input(file: str, remove_lines_breaks: bool = False) -> list[str]:
     """Function to load input with optional removal of line breaks."""
 
     with open(file) as f:
@@ -21,7 +21,7 @@ def load_input(file, remove_lines_breaks=False):
         return lines
 
 
-def load_input_int(file, remove_lines_breaks=False):
+def load_input_int(file: str, remove_lines_breaks: bool = False) -> list[int]:
     """Function to load input and convert each line to int."""
 
     lines = load_input(file, remove_lines_breaks)
@@ -31,7 +31,7 @@ def load_input_int(file, remove_lines_breaks=False):
     return lines_processed
 
 
-def load_input_split(file, remove_lines_breaks=False):
+def load_input_split(file: str, remove_lines_breaks: bool = False) -> list[list[str]]:
     """Function to load input and split each line by a space separator."""
 
     lines = load_input(file, remove_lines_breaks)

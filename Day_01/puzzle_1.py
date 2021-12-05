@@ -4,7 +4,7 @@ sys.path.append("..")
 import helpers  # noqa
 
 
-def count_depth_measurement_increases(input):
+def count_depth_measurement_increases(input: list[int]) -> int:
     """Function to calculate the number of time depth increases between
     subsequent measurements.
     """
