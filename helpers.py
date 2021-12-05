@@ -1,7 +1,10 @@
-def load_input(
-    file, remove_lines_breaks=False, convert_to_int=False, split_lines=False
-):
-    """Function to load input with optional processing."""
+"""Helper module with data loading functions that can be reused for
+each puzzle.
+"""
+
+
+def load_input(file, remove_lines_breaks=False):
+    """Function to load input with optional removal of line breaks."""
 
     with open(file) as f:
 
@@ -9,14 +12,30 @@ def load_input(
 
     if remove_lines_breaks:
 
-        lines = [x.replace("\n", "") for x in lines]
+        lines_processed = [x.replace("\n", "") for x in lines]
 
-    if convert_to_int:
+        return lines_processed
 
-        lines = [int(x) for x in lines]
+    else:
 
-    if split_lines:
+        return lines
 
-        lines = [x.split(" ") for x in lines]
 
-    return lines
+def load_input_int(file, remove_lines_breaks=False):
+    """Function to load input and convert each line to int."""
+
+    lines = load_input(file, remove_lines_breaks)
+
+    lines_processed = [int(x) for x in lines]
+
+    return lines_processed
+
+
+def load_input_split(file, remove_lines_breaks=False):
+    """Function to load input and split each line by a space separator."""
+
+    lines = load_input(file, remove_lines_breaks)
+
+    lines_processed = [x.split(" ") for x in lines]
+
+    return lines_processed

@@ -24,9 +24,7 @@ def count_depth_measurement_increases(input):
 
 if __name__ == "__main__":
 
-    inputs = helpers.load_input(
-        "input_1.txt", remove_lines_breaks=True, convert_to_int=True
-    )
+    inputs = helpers.load_input_int("input_1.txt", remove_lines_breaks=True)
 
     result = count_depth_measurement_increases(inputs)
 

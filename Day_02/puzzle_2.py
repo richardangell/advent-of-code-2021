@@ -32,9 +32,7 @@ def calculate_position_and_depth(input):
 
 if __name__ == "__main__":
 
-    inputs = helpers.load_input(
-        "input_1.txt", remove_lines_breaks=True, split_lines=True
-    )
+    inputs = helpers.load_input_split("input_1.txt", remove_lines_breaks=True)
 
     result = calculate_position_and_depth(inputs)
 
