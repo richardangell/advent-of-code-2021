@@ -1,51 +1,15 @@
 import numpy as np
+from numpy.typing import ArrayLike
 import sys
+from puzzle_1 import load_input
 
 sys.path.append("..")
 import helpers  # noqa
 
 
-def load_input(file):
-    """Functiont to load the input file and return the numbers, boards with
-    numbers and blank boards.
-    """
-
-    input = helpers.load_input(file, remove_lines_breaks=True)
-
-    draw_numbers = [int(x) for x in input[0].split(",")]
-
-    boards = []
-
-    next_board = []
-
-    for i, row in enumerate(input[2:]):
-
-        if row == "":
-
-            pass
-
-        else:
-
-            row_split = row.split(" ")
-
-            row_split = [int(x) for x in row_split if x != ""]
-
-            next_board.append(row_split)
-
-            if len(next_board) == 5:
-
-                boards.append(np.array(next_board))
-
-                next_board = []
-
-    blank_board = np.array([[0, 0, 0, 0, 0]] * 5)
-
-    blank_boards = [blank_board] * len(boards)
-
-    return draw_numbers, boards, blank_boards
-
-
-def calculate_last_winning_score(draw_numbers, boards, blank_boards):
+def calculate_last_winning_score(
+    draw_numbers: list[int], boards: list[ArrayLike], blank_boards: list[ArrayLike]
+) -> tuple[int, int, int]:
     """Function to calculate the winning score from the
     board which would win last. The score is given by
     sum of all unmarked numbers on that board multiplied
