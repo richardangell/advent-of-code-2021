@@ -1,33 +1,13 @@
 from collections import Counter
+import typing
 import sys
+from puzzle_1 import load_input
 
 sys.path.append("..")
 import helpers  # noqa
 
 
-def load_input(file):
-    """Functiont to load the input file and return the numbers, boards with
-    numbers and blank boards.
-    """
-
-    input = helpers.load_input(file, remove_lines_breaks=True)
-
-    input_split = [x.split(" -> ") for x in input]
-
-    input_processed = []
-
-    for row in input_split:
-
-        coords_split = [coords.split(",") for coords in row]
-
-        coords_tuple = [tuple([int(value) for value in x]) for x in coords_split]
-
-        input_processed.append(coords_tuple)
-
-    return input_processed
-
-
-def calculate_most_dangerous_points(input):
+def calculate_most_dangerous_points(input: list[list[tuple[int, ...]]]) -> int:
     """Function to calculate the most dangerous hydrothermal
     vent locations - which have more than 2 lines crossing
     them.
@@ -35,7 +15,7 @@ def calculate_most_dangerous_points(input):
 
     path_counters = [convert_coord_pair_to_counter(x) for x in input]
 
-    overall_counter = Counter()
+    overall_counter: typing.Counter = Counter()
 
     for path_counter in path_counters:
 
@@ -46,12 +26,12 @@ def calculate_most_dangerous_points(input):
     return danger_coords
 
 
-def convert_coord_pair_to_counter(coord_pair):
+def convert_coord_pair_to_counter(coord_pair: list[tuple[int, ...]]) -> typing.Counter:
     """Function to convert a list of a pair of tuples giving
     start and end coords to a Counter for each coordinate.
     """
 
-    coord_counter = Counter()
+    coord_counter: typing.Counter = Counter()
 
     start_coord = coord_pair[0]
     end_coord = coord_pair[1]
