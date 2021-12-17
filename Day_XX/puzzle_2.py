@@ -1,13 +1,8 @@
-import sys
-
-sys.path.append("..")
-import helpers  # noqa
-
-
+import puzzle_1
 
 
 if __name__ == "__main__":
 
-    input = helpers.load_input("input_1.txt", remove_lines_breaks=True)
+    input = puzzle_1.load_input("input_1.txt")
 
     print(input)

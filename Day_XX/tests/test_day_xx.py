@@ -2,15 +2,17 @@ import puzzle_1
 import puzzle_2
 
 
-def test_puzzle_1():
+class TestPuzzle1:
+    """Tests for puzzle 1."""
 
-    input_1 = puzzle_1.load_input("tests/input_1.txt")
+    def test_puzzle_1(self, input_1):
 
-    assert
+        assert 1 == 1
 
 
-def test_puzzle_2():
+class TestPuzzle2:
+    """Tests for puzzle 2."""
 
-    input_1 = puzzle_2.load_input("tests/input_1.txt")
+    def test_puzzle_2(self, input_1):
 
-    assert
+        assert 1 == 1
