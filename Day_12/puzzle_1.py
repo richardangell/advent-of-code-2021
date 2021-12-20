@@ -63,18 +63,14 @@ def find_paths_not_visiting_small_caves_twice(input: dict) -> list[list[str]]:
 def traverse_caves_recursive(cave: str, cave_system: dict, current_path: list[str]):
     """Recursively traverse through all paths in the cave."""
 
-    print(f"{cave} : {current_path}")
-
     if cave != "START":
 
         # build the current path traversed
         current_path = current_path[:]
         current_path.append(cave)
 
-    print("current_path:", current_path)
-
     if cave == "END":
-        print(f"path to end!! ---- {current_path}")
+
         return current_path
 
     previous_cave_counts = Counter(current_path)
@@ -91,13 +87,7 @@ def traverse_caves_recursive(cave: str, cave_system: dict, current_path: list[st
         if cave_ not in small_caves_previously_visited
     ]
 
-    print(f"potential_next_caves: {potential_next_caves}")
-
-    if len(potential_next_caves) == 0:
-        print("no new options!")
-        return None
-
-    else:
+    if len(potential_next_caves) > 0:
 
         return [
             traverse_caves_recursive(next_cave, cave_system, current_path)
@@ -106,7 +96,9 @@ def traverse_caves_recursive(cave: str, cave_system: dict, current_path: list[st
 
 
 def unnest_paths(paths: list) -> list:
-    """Unnest a nested list."""
+    """Unnest a nested list of paths. Also removes paths that consist
+    entirely of None values.
+    """
 
     def unnest_recursive(list_: list):
         """Recursive checking if a list contains no list elements."""
@@ -115,7 +107,10 @@ def unnest_paths(paths: list) -> list:
 
             if all([type(sub_l) is not list for sub_l in list_]):
 
-                unnested_list.append(list_)
+                # remove lists comprising of just None values
+                if not all([sub_l is None for sub_l in list_]):
+
+                    unnested_list.append(list_)
 
             else:
 
@@ -139,11 +134,53 @@ def count_paths_not_visiting_small_caves_twice(input: list[list[str]]) -> int:
 
     paths = unnest_paths(nested_paths)
 
-    if not all([type(p) is list for p in paths]):
+    check_paths(paths)
+
+    return len(paths)
+
+
+def check_paths(paths_list: list[list[str]]) -> None:
+    """Perform checks on the paths that have been returned from
+    find_paths_not_visiting_small_caves_twice.
+    """
+
+    if not all([type(p) is list for p in paths_list]):
 
         raise TypeError("not all elements are lists")
 
-    return len(paths)
+    for p in paths_list:
+
+        if type(p) is not list:
+
+            raise TypeError(f"got path {p} which is not a list")
+
+        if p[0] != "START":
+
+            raise ValueError(f"got path not starting at start; {p}")
+
+        if p[len(p) - 1] != "END":
+
+            raise ValueError(f"got path not ending at end; {p}")
+
+        cave_counts = Counter(p)
+
+        if cave_counts["START"] != 1:
+
+            raise ValueError(f"got path not visiting start once; {p}")
+
+        if cave_counts["END"] != 1:
+
+            raise ValueError(f"got path not visiting end once; {p}")
+
+        for cave in cave_counts.keys():
+
+            if cave.islower():
+
+                if cave_counts[cave] > 1:
+
+                    raise ValueError(
+                        f"got path visiting small cave more than once; {p}"
+                    )
 
 
 if __name__ == "__main__":
@@ -151,5 +188,5 @@ if __name__ == "__main__":
     input = load_input("input_1.txt")
 
     result = count_paths_not_visiting_small_caves_twice(input)
-    # import pdb; pdb.set_trace()
+
     print(result)
