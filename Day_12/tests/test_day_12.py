@@ -1,6 +1,7 @@
 import pytest
 
 import puzzle_1
+import puzzle_2
 
 
 class TestPuzzle1:
@@ -42,6 +43,26 @@ class TestPuzzle1:
 class TestPuzzle2:
     """Tests for puzzle 2."""
 
-    def test_puzzle_2(self):
+    def test_paths_found(self, load_input, load_output):
+        """Test that the correct paths are found."""
 
-        assert 1 == 1
+        input = load_input("input_1")
+        output = load_output("input_1_output_pt_2")
+
+        input_processed = puzzle_1.process_input(input)
+
+        nested_paths = puzzle_2.find_allowed_paths(input_processed)
+
+        result = puzzle_1.unnest_paths(nested_paths)
+
+        assert sorted(result) == sorted(output)
+
+    @pytest.mark.parametrize(
+        "input_file,expected", [("input_1", 36), ("input_2", 103), ("input_3", 3509)]
+    )
+    def test_count_allowed_paths(self, load_input, input_file, expected):
+        """Test that the count of paths found is correct."""
+
+        input = load_input(input_file)
+
+        assert puzzle_2.count_allowed_paths(input) == expected
