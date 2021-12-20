@@ -31,11 +31,13 @@ def load_input_int(file: str, remove_lines_breaks: bool = False) -> list[int]:
     return lines_processed
 
 
-def load_input_split(file: str, remove_lines_breaks: bool = False) -> list[list[str]]:
+def load_input_split(
+    file: str, remove_lines_breaks: bool = False, split_string: str = " "
+) -> list[list[str]]:
     """Function to load input and split each line by a space separator."""
 
     lines = load_input(file, remove_lines_breaks)
 
-    lines_processed = [x.split(" ") for x in lines]
+    lines_processed = [x.split(split_string) for x in lines]
 
     return lines_processed
