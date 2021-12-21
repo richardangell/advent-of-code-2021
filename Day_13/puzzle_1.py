@@ -72,7 +72,7 @@ def create_array_from_coords(coords: list[list[int]]) -> ArrayLike:
 
             max_y = coord[1]
 
-    dot_array = np.zeros((max_y + 1, max_x + 1))
+    dot_array = np.zeros((max_y + 2, max_x + 1))
 
     for coord in coords:
 
@@ -119,12 +119,7 @@ def apply_fold(paper: ArrayLike, instruction: tuple[str, int]) -> ArrayLike:
 
         right_flipped = np.flip(right_half, axis=1)
 
-        left_half[: right_flipped.shape[0], : right_flipped.shape[1]] = (
-            left_half[: right_flipped.shape[0], : right_flipped.shape[1]]
-            + right_flipped
-        )
-
-        return left_half
+        return left_half + right_flipped
 
     # up fold
     elif axis == "y":
@@ -134,12 +129,7 @@ def apply_fold(paper: ArrayLike, instruction: tuple[str, int]) -> ArrayLike:
 
         bottom_flipped = np.flip(bottom_half, axis=0)
 
-        top_half[: bottom_flipped.shape[0], : bottom_flipped.shape[1]] = (
-            top_half[: bottom_flipped.shape[0], : bottom_flipped.shape[1]]
-            + bottom_flipped
-        )
-
-        return top_half
+        return top_half + bottom_flipped
 
     else:
 

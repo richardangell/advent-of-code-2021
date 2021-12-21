@@ -37,11 +37,3 @@ class TestPuzzle1:
             puzzle_1.count_visible_dots_after_folding(input_1[0], input_1[1], n_folds)
             == expected
         )
-
-
-class TestPuzzle2:
-    """Tests for puzzle 2."""
-
-    def test_puzzle_2(self, input_1):
-
-        assert 1 == 1
